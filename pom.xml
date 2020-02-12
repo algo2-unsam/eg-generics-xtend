@@ -3,11 +3,21 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>eg-generics-xtend</artifactId>
+	<groupId>org.uqbar-project</groupId>
 	<version>0.0.1-SNAPSHOT</version>
 
-	<parent>
-		<groupId>org.uqbar-project</groupId>
-		<artifactId>uqbar-xtend-parent</artifactId>
-		<version>2.17.1</version>
-	</parent>
+	<dependencies>
+		<dependency>
+			<groupId>org.eclipse.xtend</groupId>
+			<artifactId>org.eclipse.xtend.lib</artifactId>
+			<version>2.20.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>5.5.2</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
 </project>
