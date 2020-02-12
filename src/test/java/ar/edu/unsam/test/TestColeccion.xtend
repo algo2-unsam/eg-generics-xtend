@@ -4,16 +4,18 @@ import ar.edu.unsam.Auto
 import ar.edu.unsam.Coleccion
 import ar.edu.unsam.Figurita
 import java.time.LocalDate
-import org.junit.Assert
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+
+import static org.junit.jupiter.api.Assertions.assertFalse
+import static org.junit.jupiter.api.Assertions.assertTrue
 
 class TestColeccion {
 
 	Coleccion<Figurita> albumFiguritas
 	Coleccion<Auto> coleccionDeAutos
 
-	@Before
+	@BeforeEach
 	def void init() {
 
 		albumFiguritas = new Coleccion<Figurita>() => [
@@ -41,19 +43,19 @@ class TestColeccion {
 	@Test
 	def testColeccionCompleta() {
 		albumFiguritas.agregarElemento(new Figurita)
-		Assert.assertTrue(albumFiguritas.estaCompleta)
+		assertTrue(albumFiguritas.estaCompleta)
 		
 	}
 
 	@Test
 	def testColeccionNoCompleta() {
-		Assert.assertFalse(albumFiguritas.estaCompleta)
+		assertFalse(albumFiguritas.estaCompleta)
 	}
 
 	@Test
 	def testColeccionFiguritasValiosa() {
 		albumFiguritas.agregarElemento(new Figurita)
-		Assert.assertTrue(albumFiguritas.esValiosa)
+		assertTrue(albumFiguritas.esValiosa)
 	}
 	
 	@Test
@@ -61,12 +63,12 @@ class TestColeccion {
 		albumFiguritas.setCantidadObjetivo = 3
 		albumFiguritas.agregarElemento(new Figurita)
 		albumFiguritas.agregarElemento(new Figurita)
-		Assert.assertFalse(albumFiguritas.esValiosa)
+		assertFalse(albumFiguritas.esValiosa)
 	}
 	
 	@Test
 	def testColeccionAutosValiosa() {
-		Assert.assertTrue(coleccionDeAutos.esValiosa)
+		assertTrue(coleccionDeAutos.esValiosa)
 	}
 
 }
