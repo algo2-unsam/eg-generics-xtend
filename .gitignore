@@ -1,6 +1,6 @@
+/target/
 .classpath
 .project
-.settings/
-src/main/generated-sources/
-target/
-src/test/generated-sources/
+bin
+generated*
+.settings
