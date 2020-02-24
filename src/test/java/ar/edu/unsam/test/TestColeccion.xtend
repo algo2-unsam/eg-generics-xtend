@@ -9,66 +9,66 @@ import org.junit.jupiter.api.Test
 
 import static org.junit.jupiter.api.Assertions.assertFalse
 import static org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.DisplayName
 
 class TestColeccion {
 
-	Coleccion<Figurita> albumFiguritas
-	Coleccion<Auto> coleccionDeAutos
+	Coleccion<Figurita> coleccionFiguritas
+	Coleccion<Auto> coleccionAutos
 
 	@BeforeEach
 	def void init() {
 
-		albumFiguritas = new Coleccion<Figurita>() => [
-			setCantidadObjetivo = 2
-		]
-		
-		coleccionDeAutos = new Coleccion<Auto>() => [
-			setCantidadObjetivo = 1
-		]
+		coleccionFiguritas = new Coleccion<Figurita>() => [cantidadObjetivo = 2]
+		coleccionFiguritas.agregarElemento(new Figurita => [esHolograma = true])
 
-		albumFiguritas.agregarElemento(
-			new Figurita => [
-				esHolograma = true
-			]
-		)
-		
-		coleccionDeAutos.agregarElemento(
-			new Auto => [
-				fechaLanzamiento = LocalDate.of(1929, 12, 31)
-			]
-		)
+		coleccionAutos = new Coleccion<Auto>() => [cantidadObjetivo = 3]
+		coleccionAutos.agregarElemento(new Auto => [fechaLanzamiento = LocalDate.of(1929, 12, 31)])
 
 	}
 
 	@Test
-	def testColeccionCompleta() {
-		albumFiguritas.agregarElemento(new Figurita)
-		assertTrue(albumFiguritas.estaCompleta)
-		
-	}
-
-	@Test
+	@DisplayName("Colección con cantidad de elementos menor a la cantidad objetivo no está completa")
 	def testColeccionNoCompleta() {
-		assertFalse(albumFiguritas.estaCompleta)
+		assertFalse(coleccionFiguritas.estaCompleta)
 	}
 
 	@Test
+	@DisplayName("Colección con cantidad de elementos igual a la cantidad objetivo está completa")
+	def testColeccionCompleta() {
+		coleccionFiguritas.agregarElemento(new Figurita)
+		assertTrue(coleccionFiguritas.estaCompleta)
+
+	}
+
+	@Test
+	@DisplayName("Colección de figuritas completa y con la mitad de elementos raros es valiosa")
 	def testColeccionFiguritasValiosa() {
-		albumFiguritas.agregarElemento(new Figurita)
-		assertTrue(albumFiguritas.esValiosa)
+		coleccionFiguritas.agregarElemento(new Figurita)
+		assertTrue(coleccionFiguritas.esValiosa)
 	}
-	
+
 	@Test
+	@DisplayName("Colección de figuritas completa con menos de la mitad de elementos raros no es valiosa")
 	def testColeccionFiguritasNoValiosa() {
-		albumFiguritas.setCantidadObjetivo = 3
-		albumFiguritas.agregarElemento(new Figurita)
-		albumFiguritas.agregarElemento(new Figurita)
-		assertFalse(albumFiguritas.esValiosa)
+		coleccionFiguritas.cantidadObjetivo = 3
+		coleccionFiguritas.agregarElemento(new Figurita)
+		coleccionFiguritas.agregarElemento(new Figurita)
+		assertFalse(coleccionFiguritas.esValiosa)
 	}
-	
+
 	@Test
+	@DisplayName("Colección de autos incompleta no es valiosa")
+	def testColeccionAutosNoValiosa() {
+		assertFalse(coleccionAutos.esValiosa)
+	}
+
+	@Test
+	@DisplayName("Colección de autos completa y con más de la mitad de elementos raros es valiosa")
 	def testColeccionAutosValiosa() {
-		assertTrue(coleccionDeAutos.esValiosa)
+		coleccionAutos.agregarElemento(new Auto => [fechaLanzamiento = LocalDate.of(1930, 01, 01)])
+		coleccionAutos.agregarElemento(new Auto => [fechaLanzamiento = LocalDate.of(1928, 01, 01)])
+		assertTrue(coleccionAutos.esValiosa)
 	}
 
 }

@@ -11,11 +11,13 @@ interface Coleccionable {
 
 @Accessors
 class Auto implements Coleccionable {
+	
+	static Integer MAX_ANIO_RARO = 1930
 
-	LocalDate fechaLanzamiento
+	LocalDate fechaLanzamiento = LocalDate.now
 
 	override esRaro() {
-		fechaLanzamiento.year < 1930
+		fechaLanzamiento.year < MAX_ANIO_RARO
 	}
 
 }
